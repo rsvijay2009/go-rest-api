@@ -1,0 +1,32 @@
+version: "3.7"
+services:
+  app-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    restart: always
+    depends_on:
+      - db
+    networks:
+      - backend
+  db:
+    image: mysql:5.7
+    ports:
+      - "3306"
+    restart: always
+    environment:
+      MYSQL_DATABASE: medication_app
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+      MYSQL_ROOT_PASSWORD: admin
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./db/scripts.sql:/docker-entrypoint-initdb.d/scripts.sql
+    networks:
+      - backend
+volumes:
+  db-data:
+networks:
+  backend:
