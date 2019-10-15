@@ -30,6 +30,7 @@ func main() {
 	if err != nil {
 		panic(err.Error())
 	}
+
 	defer db.Close()
 	router := mux.NewRouter()
 	router.HandleFunc("/", greetUsers).Methods("GET")
@@ -38,7 +39,7 @@ func main() {
 	router.HandleFunc("/patients/{id}", getPatient).Methods("GET")
 	router.HandleFunc("/patients/{id}", updatePatient).Methods("PUT")
 	router.HandleFunc("/patients/{id}", deletePatient).Methods("DELETE")
-	http.ListenAndServe(":8080", router)
+	http.ListenAndServe(":9090", router)
 }
 func greetUsers(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("WELCOME TO OUR SITE")

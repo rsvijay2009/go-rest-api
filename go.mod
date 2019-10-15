@@ -1,4 +1,4 @@
-module "https://github.com/rsvijay2009/go-rest-api"
+module github.com/rsvijay2009/go-rest-api
 
 go 1.12
 
